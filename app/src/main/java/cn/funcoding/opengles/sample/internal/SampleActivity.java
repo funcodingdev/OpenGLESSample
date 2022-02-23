@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class BaseSampleActivity extends AppCompatActivity {
+public class SampleActivity extends AppCompatActivity {
 
     @CallSuper
     @Override
@@ -27,6 +27,7 @@ public class BaseSampleActivity extends AppCompatActivity {
         }
     }
 
+    @CallSuper
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
