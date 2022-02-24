@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.funcoding.opengles.sample.databinding.ActivityGoogleSampleBinding;
+import cn.funcoding.opengles.sample.google.square1.SquareActivity1;
+import cn.funcoding.opengles.sample.google.square2.SquareActivity2;
+import cn.funcoding.opengles.sample.google.square3.SquareActivity3;
+import cn.funcoding.opengles.sample.google.square4.SquareActivity4;
 import cn.funcoding.opengles.sample.google.triangle1.TriangleActivity1;
 import cn.funcoding.opengles.sample.google.triangle2.TriangleActivity2;
 import cn.funcoding.opengles.sample.google.triangle3.TriangleActivity3;
@@ -23,10 +27,15 @@ public class GoogleSampleActivity extends SampleActivity {
     private ActivityGoogleSampleBinding binding;
     private final List<SampleItemModel> sampleItemModelList = new ArrayList<SampleItemModel>() {
         {
-            add(new SampleItemModel("绘制三角形", TriangleActivity1.class));
-            add(new SampleItemModel("应用投影和相机视图", TriangleActivity2.class));
-            add(new SampleItemModel("添加动画", TriangleActivity3.class));
-            add(new SampleItemModel("响应触摸事件", TriangleActivity4.class));
+            add(new SampleItemModel("三角形-绘制三角形", TriangleActivity1.class));
+            add(new SampleItemModel("三角形-应用投影和相机视图", TriangleActivity2.class));
+            add(new SampleItemModel("三角形-添加动画", TriangleActivity3.class));
+            add(new SampleItemModel("三角形-响应触摸事件", TriangleActivity4.class));
+
+            add(new SampleItemModel("矩形-绘制矩形", SquareActivity1.class));
+            add(new SampleItemModel("矩形-应用投影和相机视图", SquareActivity2.class));
+            add(new SampleItemModel("矩形-添加动画", SquareActivity3.class));
+            add(new SampleItemModel("矩形-响应触摸事件", SquareActivity4.class));
         }
     };
 

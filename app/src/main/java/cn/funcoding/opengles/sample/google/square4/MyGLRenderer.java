@@ -1,7 +1,8 @@
-package cn.funcoding.opengles.sample.google.triangle1;
+package cn.funcoding.opengles.sample.google.square4;
 
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
+import android.opengl.Matrix;
 import android.util.Log;
 
 import javax.microedition.khronos.egl.EGLConfig;
@@ -16,7 +17,24 @@ import javax.microedition.khronos.opengles.GL10;
  */
 class MyGLRenderer implements GLSurfaceView.Renderer {
     private static final String TAG = "MyGLRenderer";
-    private Triangle mTriangle;
+    private Square mSquare;
+
+    // vPMatrix是"Model View Projection Matrix（模型视图投影矩阵）"的缩写
+    private final float[] vPMatrix = new float[16];
+    private final float[] projectionMatrix = new float[16];
+    private final float[] viewMatrix = new float[16];
+
+    private float[] rotationMatrix = new float[16];
+
+    public volatile float mAngle;
+
+    public float getAngle() {
+        return mAngle;
+    }
+
+    public void setAngle(float angle) {
+        mAngle = angle;
+    }
 
     /**
      * 调用一次以设置视图的 OpenGL ES 环境时调用
@@ -29,7 +47,7 @@ class MyGLRenderer implements GLSurfaceView.Renderer {
         // 设置背景框颜色
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-        mTriangle = new Triangle();
+        mSquare = new Square();
     }
 
     /**
@@ -43,6 +61,14 @@ class MyGLRenderer implements GLSurfaceView.Renderer {
     public void onSurfaceChanged(GL10 gl, int width, int height) {
         Log.i(TAG, "onSurfaceChanged: width=" + width + ", height=" + height);
         GLES20.glViewport(0, 0, width, height);
+
+        // 屏幕比率
+        float ratio = (float) width / height;
+
+        // 此投影矩阵应用于对象坐标
+        // in the onDrawFrame() method
+        // 注意：仅将投影转换应用于绘制的对象通常会导致显示画面过于空旷。一般而言，要在屏幕上显示任何内容，您还必须应用相机视图转换
+        Matrix.frustumM(projectionMatrix, 0, -ratio, ratio, -1, 1, 3, 7);
     }
 
     /**
@@ -52,10 +78,29 @@ class MyGLRenderer implements GLSurfaceView.Renderer {
      */
     @Override
     public void onDrawFrame(GL10 gl) {
+        float[] scratch = new float[16];
+
         // 重绘背景颜色
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
+
+        // Set the camera position (View matrix)
+        Matrix.setLookAtM(viewMatrix, 0, 0, 0, -3, 0f, 0f, 0f, 0f, 1.0f, 0.0f);
+
+        // Calculate the projection and view transformation
+        Matrix.multiplyMM(vPMatrix, 0, projectionMatrix, 0, viewMatrix, 0);
+
+        // Create a rotation for the triangle
+        // long time = SystemClock.uptimeMillis() % 4000L;
+        // float angle = 0.090f * ((int) time);
+        Matrix.setRotateM(rotationMatrix, 0, mAngle, 0, 0, -1.0f);
+
+        // Combine the rotation matrix with the projection and camera view
+        // Note that the vPMatrix factor *must be first* in order
+        // for the matrix multiplication product to be correct.
+        Matrix.multiplyMM(scratch, 0, vPMatrix, 0, rotationMatrix, 0);
+
         // Draw shape
-        mTriangle.draw();
+        mSquare.draw(scratch);
     }
 
     /**

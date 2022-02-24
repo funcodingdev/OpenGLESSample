@@ -1,4 +1,4 @@
-package cn.funcoding.opengles.sample.google.triangle1;
+package cn.funcoding.opengles.sample.google.square1;
 
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
@@ -16,7 +16,7 @@ import javax.microedition.khronos.opengles.GL10;
  */
 class MyGLRenderer implements GLSurfaceView.Renderer {
     private static final String TAG = "MyGLRenderer";
-    private Triangle mTriangle;
+    private Square mSquare;
 
     /**
      * 调用一次以设置视图的 OpenGL ES 环境时调用
@@ -29,7 +29,7 @@ class MyGLRenderer implements GLSurfaceView.Renderer {
         // 设置背景框颜色
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-        mTriangle = new Triangle();
+        mSquare = new Square();
     }
 
     /**
@@ -55,7 +55,7 @@ class MyGLRenderer implements GLSurfaceView.Renderer {
         // 重绘背景颜色
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
         // Draw shape
-        mTriangle.draw();
+        mSquare.draw();
     }
 
     /**

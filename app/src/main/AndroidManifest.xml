@@ -28,6 +28,10 @@
         <activity android:name=".google.triangle2.TriangleActivity2" />
         <activity android:name=".google.triangle3.TriangleActivity3" />
         <activity android:name=".google.triangle4.TriangleActivity4" />
+        <activity android:name=".google.square1.SquareActivity1" />
+        <activity android:name=".google.square2.SquareActivity2" />
+        <activity android:name=".google.square3.SquareActivity3" />
+        <activity android:name=".google.square4.SquareActivity4" />
     </application>
 
 </manifest>

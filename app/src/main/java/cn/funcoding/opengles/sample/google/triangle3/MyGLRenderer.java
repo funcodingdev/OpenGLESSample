@@ -19,7 +19,6 @@ import javax.microedition.khronos.opengles.GL10;
 class MyGLRenderer implements GLSurfaceView.Renderer {
     private static final String TAG = "MyGLRenderer";
     private Triangle mTriangle;
-    private Square mSquare;
 
     // vPMatrix是"Model View Projection Matrix（模型视图投影矩阵）"的缩写
     private final float[] vPMatrix = new float[16];
@@ -41,7 +40,6 @@ class MyGLRenderer implements GLSurfaceView.Renderer {
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
         mTriangle = new Triangle();
-        mSquare = new Square();
     }
 
     /**
